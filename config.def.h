@@ -95,6 +95,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ MODKEY,                       XK_w,      spawn,          SHCMD("$BROWSER") },
 	{ MODKEY,                       XK_f,      spawn,          SHCMD(TERMINAL " -e lf") },
+	{ MODKEY,                       XK_m,      spawn,          SHCMD(TERMINAL " -e neomutt") },
 	{ 0, XF86XK_AudioMute,                     spawn,          SHCMD("amixer -q set Master toggle; kill -44 $(pidof dwmblocks)") },
 	{ 0, XF86XK_AudioRaiseVolume,              spawn,          SHCMD("amixer -q set Master 5%+; kill -44 $(pidof dwmblocks)") },
 	{ 0, XF86XK_AudioLowerVolume,              spawn,          SHCMD("amixer -q set Master 5%-; kill -44 $(pidof dwmblocks)") },
