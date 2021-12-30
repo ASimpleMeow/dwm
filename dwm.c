@@ -182,6 +182,7 @@ static void focus(Client *c);
 static void focusin(XEvent *e);
 static void focusmon(const Arg *arg);
 static void focusstack(const Arg *arg);
+static void swapfocus();
 static Atom getatomprop(Client *c, Atom prop);
 static int getrootptr(int *x, int *y);
 static long getstate(Window w);
@@ -256,7 +257,7 @@ static Client *termforwin(const Client *c);
 static pid_t winpid(Window w);
 
 /* variables */
-static Client *prevclient = NULL;
+static Arg focusdirection={.i=1};
 static const char broken[] = "broken";
 static char stext[256];
 static int screen;
@@ -940,6 +941,8 @@ focusmon(const Arg *arg)
 void
 focusstack(const Arg *arg)
 {
+  focusdirection.i=arg->i;
+
 	Client *c = NULL, *i;
 
 	if (!selmon->sel || (selmon->sel->isfullscreen && lockfullscreen))
@@ -961,6 +964,13 @@ focusstack(const Arg *arg)
 		focus(c);
 		restack(selmon);
 	}
+}
+
+void
+swapfocus()
+{
+  focusdirection.i*=-1;
+  focusstack(&focusdirection);
 }
 
 Atom
